@@ -11,14 +11,21 @@
 
 # misc
 .DS_Store
+.env
 .env.local
-.env.development.local
+.development.client.env
+.development.server.env
 .env.test.local
 .env.production.local
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+**/*/package-lock.json
+**/*/yarn.lock.json
 
+
+# config files
 **/*/config.ts
-*.json
+**/*/serviceAccountKey.json
+**/*/.vscode
