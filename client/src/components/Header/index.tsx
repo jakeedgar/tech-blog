@@ -12,8 +12,8 @@ export interface IHeaderProps {
 const Header: React.FC<IHeaderProps> = props => {
     const { height, image, title, headline, children } = props;
 
-    let headerStyle = {      
-        background: 'grey',
+    let headerStyle = {
+        background: 'linear-gradient(rgba(36, 20, 38, 0.5), rgba(36, 39, 38, 0.5)), url(' + image + ') no-repeat center center',
         WebkitBackgroundSize: 'cover',
         MozBackgroundSize: 'cover',
         OBackgroundSize: 'cover',
