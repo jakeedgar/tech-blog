@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import routes from './config/routes';
 import { initialUserState, UserContextProvider, userReducer } from './contexts/user';
 import LoadingComponent from './components/LoadingComponent';
+import AuthRoute from './components/AuthRoute';
 
 export interface IApplicationProps {}
 dotenv.config();
@@ -55,6 +56,17 @@ const App: React.FunctionComponent<IApplicationProps> = (props) => {
       <BrowserRouter>
         <Routes>
           {routes.map((route, index) => {
+            if (route.auth) {
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <AuthRoute>
+                    <route.component />
+                  </AuthRoute>
+                }
+              />;
+            }
             return <Route key={index} path={route.path} element={<route.component />} />;
           })}
         </Routes>
