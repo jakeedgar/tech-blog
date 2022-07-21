@@ -1,8 +1,8 @@
-import IRoute from "../interfaces/route"
-import LoginPage from '../pages/login'
-import BlogPage from '../pages/blog'
-import EditPage from '../pages/edit'
-import HomePage from "../pages/home";
+import IRoute from '../interfaces/route';
+import LoginPage from '../pages/login';
+import BlogPage from '../pages/blog';
+import EditPage from '../pages/edit';
+import HomePage from '../pages/home';
 
 const authRoutes: IRoute[] = [
   {
@@ -55,10 +55,6 @@ const mainRoutes: IRoute[] = [
   }
 ];
 
-const routes: IRoute[] = [
-  ...authRoutes,
-  ...blogRoutes,
-  ...mainRoutes
-];
+const routes: IRoute[] = [...authRoutes, ...blogRoutes, ...mainRoutes];
 
 export default routes;

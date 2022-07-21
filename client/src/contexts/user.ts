@@ -1,5 +1,5 @@
-import React, { createContext } from "react";
-import IUser, { DEFAULT_FIRE_TOKEN, DEFAULT_USER } from "../interfaces/user";
+import React, { createContext } from 'react';
+import IUser, { DEFAULT_FIRE_TOKEN, DEFAULT_USER } from '../interfaces/user';
 
 export interface IUserState {
   user: IUser;
@@ -14,18 +14,17 @@ export interface IUserActions {
 export const initialUserState: IUserState = {
   user: DEFAULT_USER,
   fire_token: DEFAULT_FIRE_TOKEN
-}
+};
 
 export const userReducer = (state: IUserState, action: IUserActions) => {
   let user = action.payload.user;
   let fire_token = action.payload.fire_token;
 
-  switch (action.type)
-  {
+  switch (action.type) {
     case 'login':
       localStorage.setItem('fire_token', fire_token);
 
-      return { user, fire_token};
+      return { user, fire_token };
     case 'logout':
       localStorage.removeItem('fire_token');
 
