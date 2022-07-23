@@ -5,6 +5,8 @@ import config from './config/config';
 import mongoose from 'mongoose';
 import firebaseAdmin from 'firebase-admin';
 
+import userRoutes from './routes/user';
+
 const router = express();
 
 const httpServer = http.createServer(router);
@@ -29,7 +31,7 @@ router.use((req, res, next) => {
   logging.info(`METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
   res.on('finish', () => {
-      logging.info(`METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
+    logging.info(`METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
   });
 
   next();
@@ -45,21 +47,22 @@ router.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
   if (req.method == 'OPTIONS') {
-      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-      return res.status(200).json({});
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+    return res.status(200).json({});
   }
 
   next();
 });
 
 /** Routes */
+router.use('/users', userRoutes);
 
 /** Error handling */
 router.use((req, res, next) => {
   const error = new Error('Not found');
 
   res.status(404).json({
-      message: error.message
+    message: error.message
   });
 });
 
