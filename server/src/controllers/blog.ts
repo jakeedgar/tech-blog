@@ -38,6 +38,7 @@ const read = (req: Request, res: Response, next: NextFunction) => {
   logging.info(`Incoming read for blog with id ${_id}`);
 
   Blog.findById(_id)
+    .populate('author')
     .exec()
     .then((blog) => {
       if (blog) {
@@ -61,8 +62,9 @@ const read = (req: Request, res: Response, next: NextFunction) => {
 
 const readAll = (req: Request, res: Response, next: NextFunction) => {
   logging.info('readAll route called');
-  logging.info(req.params.uid);
+
   Blog.find()
+    .populate('author')
     .exec()
     .then((blogs) => {
       return res.status(200).json({
@@ -83,6 +85,7 @@ const query = (req: Request, res: Response, next: NextFunction) => {
   logging.info('query time...');
 
   Blog.find(req.body)
+    .populate('author')
     .exec()
     .then((blogs) => {
       return res.status(200).json({

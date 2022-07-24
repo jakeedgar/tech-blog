@@ -9,7 +9,7 @@ const Navigation: React.FC<INavigationProps> = (props) => {
 	const userContext = useContext(UserContext);
 	const { user } = userContext.userState;
 
-	const Logout = () => {
+	const logout = () => {
 		userContext.userDispatch({ type: 'logout', payload: initialUserState });
 	};
 
@@ -17,28 +17,29 @@ const Navigation: React.FC<INavigationProps> = (props) => {
 		<Navbar color="light" light sticky="top" expand="md">
 			<Container>
 				<NavbarBrand tag={Link} to="/">
-					💻
+					📝
 				</NavbarBrand>
-				<Nav className="mr-auto" navbar />
-				{user._id === '' ? (
+				<Nav className="mr-auto" navbar></Nav>
+				{user._id !== '' ? (
+					<div>
+						<Button outline tag={Link} to="/edit">
+							<i className="far fa-sticky-note mr-2"></i>
+							Post a Blog
+						</Button>
+						<NavbarText className="ml-2 mr-2">|</NavbarText>
+						<Button outline size="sm" onClick={() => logout()}>
+							Logout
+						</Button>
+					</div>
+				) : (
 					<div>
 						<NavbarText tag={Link} to="/login">
 							Login
 						</NavbarText>
-						<NavbarText className="mr-2 ml-2">|</NavbarText>
+						<NavbarText className="ml-2 mr-2">|</NavbarText>
 						<NavbarText tag={Link} to="/register">
-							Sign Up
+							Signup
 						</NavbarText>
-					</div>
-				) : (
-					<div>
-						<Button outline tag={Link} to="edit">
-							Post a Blog
-						</Button>
-						<NavbarText className="mr-2 ml-2">|</NavbarText>
-						<Button outline size="sm" onClick={() => Logout()}>
-							Logout
-						</Button>
 					</div>
 				)}
 			</Container>

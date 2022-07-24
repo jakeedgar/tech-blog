@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import * as dotenv from 'dotenv';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import routes from './config/routes';
 import { initialUserState, UserContextProvider, userReducer } from './contexts/user';
 import LoadingComponent from './components/LoadingComponent';
@@ -17,6 +17,9 @@ const App: React.FunctionComponent<IApplicationProps> = (props) => {
 
 	/** use for debugging */
 	const [authStage, setAuthStage] = useState<string>('Checking local storage ...');
+
+	const params = useParams();
+	console.log(params);
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -72,15 +75,17 @@ const App: React.FunctionComponent<IApplicationProps> = (props) => {
 				<Routes>
 					{routes.map((route, index) => {
 						if (route.auth) {
-							<Route
-								key={index}
-								path={route.path}
-								element={
-									<AuthRoute>
-										<route.component />
-									</AuthRoute>
-								}
-							/>;
+							return (
+								<Route
+									key={index}
+									path={route.path}
+									element={
+										<AuthRoute>
+											<route.component />
+										</AuthRoute>
+									}
+								/>
+							);
 						}
 						return <Route key={index} path={route.path} element={<route.component />} />;
 					})}
