@@ -4,20 +4,20 @@ import UserContext from '../../contexts/user';
 import logging from '../../config/logging';
 
 export interface IAuthRouteProps {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 const AuthRoute: React.FC<IAuthRouteProps> = (props) => {
-  const { children } = props;
+	const { children } = props;
 
-  const { user } = useContext(UserContext).userState;
+	const userContext = useContext(UserContext);
 
-  if (user._id === '') {
-    logging.info('Unauthorized, redirecting ...');
-    return <Navigate to="/login" />;
-  } else {
-    return <>{children}</>;
-  }
+	if (userContext.userState.user._id === '') {
+		logging.info('Unauthorized, redirecting ...');
+		return <Navigate to="/login" replace={true} />;
+	} else {
+		return <>{children}</>;
+	}
 };
 
 export default AuthRoute;

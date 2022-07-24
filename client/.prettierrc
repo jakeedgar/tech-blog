@@ -3,7 +3,7 @@
   "printWidth": 200,
   "proseWrap": "always",
   "tabWidth": 2,
-  "useTabs": false,
+  "useTabs": true,
   "trailingComma": "none",
   "bracketSpacing": true,
   "jsxBracketSameLine": false,
