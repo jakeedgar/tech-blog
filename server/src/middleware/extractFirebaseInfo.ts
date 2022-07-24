@@ -6,9 +6,10 @@ const extractFirebaseInfo = (req: Request, res: Response, next: NextFunction) =>
   logging.info('Validating firebase token ...');
 
   let token = req.headers.authorization?.split(' ')[1];
+  logging.warn(token);
   logging.info('trust me bro');
 
-  if (token) {
+  if (token !== undefined) {
     firebaseAdmin
       .auth()
       .verifyIdToken(token)
@@ -27,6 +28,7 @@ const extractFirebaseInfo = (req: Request, res: Response, next: NextFunction) =>
       })
       .catch((error) => {
         logging.error(error);
+        logging.error('you done goofed kid');
 
         return res.status(501).json({
           error,

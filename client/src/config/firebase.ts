@@ -11,8 +11,4 @@ export const Provider = {
 	facebook: new FacebookAuthProvider()
 };
 
-// export const provider = new GoogleAuthProvider();
-// export const profile = provider.addScope('profile');
-// export const email = provider.addScope('email');
-
 export default Firebase;
