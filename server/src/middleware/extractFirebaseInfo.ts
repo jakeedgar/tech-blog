@@ -28,7 +28,6 @@ const extractFirebaseInfo = (req: Request, res: Response, next: NextFunction) =>
       })
       .catch((error) => {
         logging.error(error);
-        logging.error('you done goofed kid');
 
         return res.status(501).json({
           error,

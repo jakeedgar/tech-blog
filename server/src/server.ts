@@ -11,11 +11,11 @@ const router = express();
 
 const httpServer = http.createServer(router);
 
-// let serviceAccount = require('./config/serviceAccountKey.json');
+let serviceAccount = require('./config/serviceAccountKey.json');
 
-// firebaseAdmin.initializeApp({
-//   credential: firebaseAdmin.credential.cert(serviceAccount)
-// });
+firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert(serviceAccount)
+});
 
 /** connect to mongodb */
 

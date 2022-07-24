@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import 'firebase';
 import config from '../../config/config';
 import logging from '../../config/logging';
 import IUser from '../../interfaces/user';

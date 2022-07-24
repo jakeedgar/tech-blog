@@ -14,7 +14,7 @@ const AuthRoute: React.FC<IAuthRouteProps> = (props) => {
 
 	if (userContext.userState.user._id === '') {
 		logging.info('Unauthorized, redirecting ...');
-		return <Navigate to="/login" replace={true} />;
+		return <Navigate to="/login" />;
 	} else {
 		return <>{children}</>;
 	}

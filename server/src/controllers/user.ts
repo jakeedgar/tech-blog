@@ -83,6 +83,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
 const read = (req: Request, res: Response, next: NextFunction) => {
   const _id = req.params.userID;
   logging.info(`Incoming read for user with id ${_id}`);
+  logging.info(_id);
   User.findById(_id)
     .exec()
     .then((user) => {

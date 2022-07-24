@@ -25,11 +25,11 @@ const LoginPage: React.FC<IPageProps> = (props) => {
 		}
 		setAuthenticating(true);
 
-		signInWithPopup(auth, provider)
-			.then(async (response) => {
-				logging.info(response);
+		signInWithPopup(auth, Provider.google)
+			.then(async (result: any) => {
+				logging.info(result);
 
-				let user = response.user;
+				let user = result.user;
 
 				if (user) {
 					let uid = user.uid;
@@ -38,15 +38,17 @@ const LoginPage: React.FC<IPageProps> = (props) => {
 					if (name) {
 						try {
 							let fire_token = await user.getIdToken();
+							console.log(fire_token);
 
 							Authenticate(uid, name, fire_token, (error, _user) => {
 								if (error) {
 									setError(error);
+									console.log(error);
 									setAuthenticating(false);
-									navigate('/login', { replace: true });
+									navigate('/login');
 								} else if (_user) {
 									userContext.userDispatch({ type: 'login', payload: { user: _user, fire_token } });
-									navigate('/', { replace: true });
+									navigate('/');
 								}
 							});
 						} catch {
@@ -63,7 +65,7 @@ const LoginPage: React.FC<IPageProps> = (props) => {
 					setAuthenticating(false);
 				}
 			})
-			.catch((error) => {
+			.catch((error: any) => {
 				setError(error.message);
 				logging.error(error);
 				setAuthenticating(false);
@@ -79,7 +81,7 @@ const LoginPage: React.FC<IPageProps> = (props) => {
 					<Button
 						block
 						disabled={authenticating}
-						onClick={() => signInWithGoogle(Provider.google)}
+						onClick={() => signInWithGoogle(Provider)}
 						style={{
 							backgroundColor: '#510000',
 							borderColor: '#510000'
